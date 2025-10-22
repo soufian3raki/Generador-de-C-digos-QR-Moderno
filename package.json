@@ -15,14 +15,16 @@
   ],
   "author": "Tu Nombre",
   "license": "MIT",
-  "homepage": ".",
+  "homepage": "https://soufian3raki.github.io/Generador-de-C-digos-QR-Moderno",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "lucide-react": "^0.263.1",
@@ -45,9 +47,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tu-usuario/qr-code-generator.git"
+    "url": "https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno.git"
   },
   "bugs": {
-    "url": "https://github.com/tu-usuario/qr-code-generator/issues"
+    "url": "https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno/issues"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

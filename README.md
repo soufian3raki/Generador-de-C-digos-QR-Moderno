@@ -124,7 +124,7 @@
 
 ## 🚀 Demo
 
-**🌐 [Ver Demo en Vivo](https://tu-demo-url.com)**
+**🌐 [Ver Demo en Vivo](https://soufian3raki.github.io/Generador-de-C-digos-QR-Moderno)**
 
 O ejecuta localmente:
 ```bash
@@ -144,8 +144,8 @@ npm start
 
 1. **Clona el repositorio**
    ```bash
-   git clone https://github.com/tu-usuario/qr-code-generator.git
-   cd qr-code-generator
+   git clone https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno.git
+   cd Generador-de-C-digos-QR-Moderno
    ```
 
 2. **Instala las dependencias**
@@ -414,7 +414,7 @@ SOFTWARE.
 
 **⭐ Si te gusta este proyecto, ¡dale una estrella! ⭐**
 
-[🐛 Reportar Bug](https://github.com/tu-usuario/qr-code-generator/issues) • [💡 Solicitar Feature](https://github.com/tu-usuario/qr-code-generator/issues) • [📖 Documentación](https://github.com/tu-usuario/qr-code-generator/wiki)
+[🐛 Reportar Bug](https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno/issues) • [💡 Solicitar Feature](https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno/issues) • [📖 Documentación](https://github.com/soufian3raki/Generador-de-C-digos-QR-Moderno/wiki)
 
 ---
 
