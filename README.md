@@ -20,17 +20,51 @@
 - [🎯 Generador de Códigos QR Moderno](#-generador-de-códigos-qr-moderno)
   - [📋 Tabla de Contenidos](#-tabla-de-contenidos)
   - [🌟 Características](#-características)
+    - [🎨 **Personalización Completa**](#-personalización-completa)
+    - [🖼️ **Logo y Branding**](#️-logo-y-branding)
+    - [🎭 **Estilos de Borde**](#-estilos-de-borde)
+    - [📥 **Múltiples Formatos de Descarga**](#-múltiples-formatos-de-descarga)
+    - [🎯 **Experiencia de Usuario**](#-experiencia-de-usuario)
   - [🎨 Capturas de Pantalla](#-capturas-de-pantalla)
+    - [🖥️ Vista Principal](#️-vista-principal)
+    - [📱 Vista Móvil](#-vista-móvil)
+    - [🎨 Opciones Avanzadas](#-opciones-avanzadas)
   - [🚀 Demo](#-demo)
   - [🛠️ Instalación](#️-instalación)
+    - [📋 Prerrequisitos](#-prerrequisitos)
+    - [🔧 Instalación Paso a Paso](#-instalación-paso-a-paso)
+    - [🏗️ Construcción para Producción](#️-construcción-para-producción)
   - [📱 Uso](#-uso)
+    - [🎯 **Generación Básica**](#-generación-básica)
+    - [🎨 **Personalización Avanzada**](#-personalización-avanzada)
+    - [📥 **Descarga**](#-descarga)
   - [🏗️ Arquitectura del Proyecto](#️-arquitectura-del-proyecto)
+    - [🧩 **Componentes Principales**](#-componentes-principales)
+    - [🔄 **Flujo de Datos**](#-flujo-de-datos)
+    - [🎨 **Sistema de Estilos**](#-sistema-de-estilos)
   - [🔧 Tecnologías Utilizadas](#-tecnologías-utilizadas)
+    - [🎯 **Frontend**](#-frontend)
+    - [📦 **Librerías**](#-librerías)
+    - [🛠️ **Herramientas de Desarrollo**](#️-herramientas-de-desarrollo)
   - [📊 Estructura de Archivos](#-estructura-de-archivos)
   - [⚡ Funcionalidades Técnicas](#-funcionalidades-técnicas)
+    - [🎯 **Generación de QR**](#-generación-de-qr)
+    - [🖼️ **Procesamiento de Logo**](#️-procesamiento-de-logo)
+    - [🎨 **Generación SVG**](#-generación-svg)
+    - [🎭 **Sistema de Bordes**](#-sistema-de-bordes)
   - [🎯 Retos y Soluciones](#-retos-y-soluciones)
+    - [🚧 **Retos Enfrentados**](#-retos-enfrentados)
+      - [1. **Escaneabilidad con Logo**](#1-escaneabilidad-con-logo)
+      - [2. **Generación SVG**](#2-generación-svg)
+      - [3. **Rendimiento en Tiempo Real**](#3-rendimiento-en-tiempo-real)
+      - [4. **Compatibilidad Cross-Browser**](#4-compatibilidad-cross-browser)
+    - [💡 **Soluciones Implementadas**](#-soluciones-implementadas)
   - [🔮 Roadmap](#-roadmap)
+    - [🚀 **Próximas Características**](#-próximas-características)
+    - [🛠️ **Mejoras Técnicas**](#️-mejoras-técnicas)
   - [🤝 Contribuir](#-contribuir)
+    - [🔧 **Cómo Contribuir**](#-cómo-contribuir)
+    - [📋 **Guías de Contribución**](#-guías-de-contribución)
   - [📄 Licencia](#-licencia)
 
 ---
@@ -76,13 +110,13 @@
 <div align="center">
 
 ### 🖥️ Vista Principal
-![Vista Principal](https://via.placeholder.com/800x400/667eea/ffffff?text=Vista+Principal+del+Generador)
+![Vista Principal](img/VistaPrincipal.png)
 
 ### 📱 Vista Móvil
-![Vista Móvil](https://via.placeholder.com/400x600/764ba2/ffffff?text=Vista+Móvil+Responsiva)
+![Vista Móvil](img/VistaMovil.png)
 
 ### 🎨 Opciones Avanzadas
-![Opciones Avanzadas](https://via.placeholder.com/600x400/f8f9ff/333333?text=Panel+de+Opciones+Avanzadas)
+![Opciones Avanzadas](img/OpcionesAvanzadas.png)
 
 </div>
 
