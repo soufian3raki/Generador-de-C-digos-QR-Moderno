@@ -3,6 +3,27 @@ import QRCode from 'qrcode';
 import { Download, Copy, RefreshCw } from 'lucide-react';
 import './QRDisplay.css';
 
+/**
+ * QRDisplay Component
+ * 
+ * Displays the generated QR code with real-time preview and download options.
+ * Handles QR generation, logo overlay, border styling, and multiple export formats.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.data - QR code content/data
+ * @param {Object} props.options - QR code configuration options
+ * @param {number} props.options.size - QR code size in pixels
+ * @param {string} props.options.color - QR code color (hex)
+ * @param {string} props.options.backgroundColor - Background color (hex)
+ * @param {number} props.options.margin - QR code margin
+ * @param {string} props.options.errorCorrectionLevel - Error correction level (L/M/Q/H)
+ * @param {string|null} props.options.logo - Logo image data URL
+ * @param {number} props.options.logoSize - Logo size percentage
+ * @param {string} props.options.borderStyle - Border style (none/solid/dashed/dotted)
+ * @param {string} props.options.borderColor - Border color (hex)
+ * @param {number} props.options.borderWidth - Border width in pixels
+ */
+
 const QRDisplay = ({ data, options }) => {
   const canvasRef = useRef(null);
   const [isGenerating, setIsGenerating] = useState(false);

@@ -1,13 +1,28 @@
 {
   "name": "qr-code-generator",
   "version": "1.0.0",
-  "description": "Generador de códigos QR con React",
+  "description": "Generador de códigos QR moderno y personalizable con React",
   "main": "index.js",
+  "keywords": [
+    "qr-code",
+    "generator",
+    "react",
+    "javascript",
+    "canvas",
+    "svg",
+    "logo",
+    "customizable"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "dependencies": {
     "lucide-react": "^0.263.1",
@@ -27,5 +42,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/qr-code-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/qr-code-generator/issues"
   }
 }
