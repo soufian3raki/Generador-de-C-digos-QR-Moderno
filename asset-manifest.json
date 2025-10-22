@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Generador-de-C-digos-QR-Moderno/static/css/main.63e9a445.css",
+    "main.js": "/Generador-de-C-digos-QR-Moderno/static/js/main.df88f19a.js",
+    "index.html": "/Generador-de-C-digos-QR-Moderno/index.html",
+    "main.63e9a445.css.map": "/Generador-de-C-digos-QR-Moderno/static/css/main.63e9a445.css.map",
+    "main.df88f19a.js.map": "/Generador-de-C-digos-QR-Moderno/static/js/main.df88f19a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63e9a445.css",
+    "static/js/main.df88f19a.js"
+  ]
+}
