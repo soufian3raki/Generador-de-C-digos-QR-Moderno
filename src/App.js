@@ -11,7 +11,9 @@ function App() {
     color: '#000000',
     backgroundColor: '#ffffff',
     margin: 4,
-    errorCorrectionLevel: 'M'
+    errorCorrectionLevel: 'M',
+    logo: null,
+    logoSize: 50
   });
 
   return (

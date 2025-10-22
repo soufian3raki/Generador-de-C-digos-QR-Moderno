@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Link, Text, Mail, Phone, MapPin } from 'lucide-react';
+import { Settings, Link, Text, Mail, Phone, MapPin, Image, Upload } from 'lucide-react';
 import './QRGenerator.css';
 
 const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
@@ -28,6 +28,23 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
 
   const handleOptionChange = (key, value) => {
     const newOptions = { ...options, [key]: value };
+    onOptionsChange(newOptions);
+  };
+
+  const handleLogoUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const newOptions = { ...options, logo: e.target.result };
+        onOptionsChange(newOptions);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeLogo = () => {
+    const newOptions = { ...options, logo: null };
     onOptionsChange(newOptions);
   };
 
@@ -145,6 +162,51 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
                 <option value="H">Máximo (H)</option>
               </select>
             </div>
+
+            <div className="option-group logo-section">
+              <label>Logo:</label>
+              <div className="logo-controls">
+                <input
+                  type="file"
+                  id="logo-upload"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  style={{ display: 'none' }}
+                />
+                <button
+                  className="logo-upload-btn"
+                  onClick={() => document.getElementById('logo-upload').click()}
+                >
+                  <Upload size={16} />
+                  Subir Logo
+                </button>
+                
+                {options.logo && (
+                  <div className="logo-preview">
+                    <img src={options.logo} alt="Logo preview" />
+                    <button onClick={removeLogo} className="remove-logo-btn">
+                      ✕
+                    </button>
+                  </div>
+                )}
+              </div>
+              
+              {options.logo && (
+                <div className="option-group">
+                  <label htmlFor="logo-size">Tamaño del logo:</label>
+                  <input
+                    id="logo-size"
+                    type="range"
+                    min="20"
+                    max="100"
+                    value={options.logoSize}
+                    onChange={(e) => handleOptionChange('logoSize', parseInt(e.target.value))}
+                  />
+                  <span>{options.logoSize}%</span>
+                </div>
+              )}
+            </div>
+
           </div>
         )}
       </div>

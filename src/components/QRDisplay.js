@@ -12,6 +12,28 @@ const QRDisplay = ({ data, options }) => {
     generateQR();
   }, [data, options]);
 
+  const addLogoToQR = (canvas, logoDataUrl, logoSizePercent) => {
+    const ctx = canvas.getContext('2d');
+    const canvasSize = canvas.width;
+    const logoSize = (canvasSize * logoSizePercent) / 100;
+    
+    // Crear imagen del logo
+    const logoImg = new Image();
+    logoImg.onload = () => {
+      // Calcular posición centrada
+      const x = (canvasSize - logoSize) / 2;
+      const y = (canvasSize - logoSize) / 2;
+      
+      // Dibujar fondo blanco para el logo
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x - 2, y - 2, logoSize + 4, logoSize + 4);
+      
+      // Dibujar el logo
+      ctx.drawImage(logoImg, x, y, logoSize, logoSize);
+    };
+    logoImg.src = logoDataUrl;
+  };
+
   const generateQR = async () => {
     if (!data.trim()) {
       setError(null);
@@ -36,6 +58,11 @@ const QRDisplay = ({ data, options }) => {
       };
 
       await QRCode.toCanvas(canvas, data, qrOptions);
+      
+      // Añadir logo si existe
+      if (options.logo) {
+        addLogoToQR(canvas, options.logo, options.logoSize);
+      }
     } catch (err) {
       setError('Error al generar el código QR. Verifica que el contenido sea válido.');
       console.error('QR Generation Error:', err);
