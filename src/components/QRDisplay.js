@@ -77,14 +77,161 @@ const QRDisplay = ({ data, options }) => {
     }
   };
 
-  const downloadQR = () => {
+  const downloadQR = (format = 'png') => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const timestamp = Date.now();
     const link = document.createElement('a');
-    link.download = `qr-code-${Date.now()}.png`;
-    link.href = canvas.toDataURL();
+    
+    switch (format) {
+      case 'png':
+        link.download = `qr-code-${timestamp}.png`;
+        link.href = canvas.toDataURL('image/png');
+        break;
+      case 'jpg':
+        link.download = `qr-code-${timestamp}.jpg`;
+        link.href = canvas.toDataURL('image/jpeg', 0.9);
+        break;
+      case 'svg':
+        downloadSVG();
+        return;
+    }
+    
     link.click();
+  };
+
+  const downloadSVG = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Crear SVG basado en el canvas
+    const svgData = generateSVGFromCanvas(canvas);
+    const blob = new Blob([svgData], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.download = `qr-code-${Date.now()}.svg`;
+    link.href = url;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+  };
+
+  const generateSVGFromCanvas = (canvas) => {
+    const width = canvas.width;
+    const height = canvas.height;
+    
+    // Obtener los datos de imagen del canvas
+    const imageData = canvas.getContext('2d').getImageData(0, 0, width, height);
+    const data = imageData.data;
+    
+    // Crear el SVG
+    let svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">`;
+    
+    // Añadir fondo
+    svg += `<rect width="100%" height="100%" fill="${options.backgroundColor}"/>`;
+    
+    // Procesar píxeles para crear rectángulos
+    const moduleSize = detectModuleSize(canvas, data);
+    
+    for (let y = 0; y < height; y += moduleSize) {
+      for (let x = 0; x < width; x += moduleSize) {
+        if (isModuleDark(x, y, moduleSize, width, data)) {
+          svg += `<rect x="${x}" y="${y}" width="${moduleSize}" height="${moduleSize}" fill="${options.color}"/>`;
+        }
+      }
+    }
+    
+    // Añadir logo si existe
+    if (options.logo) {
+      const logoSize = (width * options.logoSize) / 100;
+      const logoX = (width - logoSize) / 2;
+      const logoY = (height - logoSize) / 2;
+      const margin = Math.max(2, logoSize * 0.1);
+      
+      svg += `<rect x="${logoX - margin}" y="${logoY - margin}" width="${logoSize + margin * 2}" height="${logoSize + margin * 2}" fill="#ffffff"/>`;
+      svg += `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${options.logo}"/>`;
+    }
+    
+    // Añadir borde si existe
+    if (options.borderStyle !== 'none') {
+      const borderWidth = options.borderWidth;
+      svg += `<rect x="0" y="0" width="${width}" height="${height}" fill="none" stroke="${options.borderColor}" stroke-width="${borderWidth}" stroke-dasharray="${options.borderStyle === 'dashed' ? '5,5' : options.borderStyle === 'dotted' ? '1,3' : 'none'}"/>`;
+    }
+    
+    svg += '</svg>';
+    return svg;
+  };
+
+  const detectModuleSize = (canvas, data) => {
+    const width = canvas.width;
+    const height = canvas.height;
+    
+    let moduleSize = 1;
+    const sampleRows = Math.min(10, height);
+    
+    for (let row = 0; row < sampleRows; row++) {
+      let currentSize = 1;
+      let inModule = false;
+      
+      for (let x = 1; x < width; x++) {
+        const pixelIndex = (row * width + x) * 4;
+        const prevPixelIndex = (row * width + x - 1) * 4;
+        
+        const r = data[pixelIndex];
+        const g = data[pixelIndex + 1];
+        const b = data[pixelIndex + 2];
+        const prevR = data[prevPixelIndex];
+        const prevG = data[prevPixelIndex + 1];
+        const prevB = data[prevPixelIndex + 2];
+        
+        const isDark = (r + g + b) / 3 < 128;
+        const wasDark = (prevR + prevG + prevB) / 3 < 128;
+        
+        if (isDark !== wasDark) {
+          if (inModule) {
+            moduleSize = Math.max(moduleSize, currentSize);
+            currentSize = 1;
+          } else {
+            inModule = true;
+            currentSize = 1;
+          }
+        } else if (inModule) {
+          currentSize++;
+        }
+      }
+    }
+    
+    return Math.max(1, Math.min(moduleSize, width / 10));
+  };
+
+  const isModuleDark = (x, y, moduleSize, width, data) => {
+    const sampleSize = Math.max(1, Math.floor(moduleSize / 2));
+    let darkPixels = 0;
+    let totalPixels = 0;
+    
+    for (let dy = 0; dy < moduleSize; dy += sampleSize) {
+      for (let dx = 0; dx < moduleSize; dx += sampleSize) {
+        const pixelX = x + dx;
+        const pixelY = y + dy;
+        
+        if (pixelX < width && pixelY < width) {
+          const pixelIndex = (pixelY * width + pixelX) * 4;
+          const r = data[pixelIndex];
+          const g = data[pixelIndex + 1];
+          const b = data[pixelIndex + 2];
+          
+          const brightness = (r + g + b) / 3;
+          if (brightness < 128) {
+            darkPixels++;
+          }
+          totalPixels++;
+        }
+      }
+    }
+    
+    return totalPixels > 0 && darkPixels / totalPixels > 0.5;
   };
 
   const copyQR = async () => {
@@ -149,10 +296,20 @@ const QRDisplay = ({ data, options }) => {
 
         {data.trim() && !error && (
           <div className="action-buttons">
-            <button onClick={downloadQR} className="action-button primary">
-              <Download size={16} />
-              Descargar PNG
-            </button>
+            <div className="download-buttons">
+              <button onClick={() => downloadQR('png')} className="action-button primary">
+                <Download size={16} />
+                PNG
+              </button>
+              <button onClick={() => downloadQR('jpg')} className="action-button primary">
+                <Download size={16} />
+                JPG
+              </button>
+              <button onClick={() => downloadQR('svg')} className="action-button primary">
+                <Download size={16} />
+                SVG
+              </button>
+            </div>
             <button onClick={copyQR} className="action-button secondary">
               <Copy size={16} />
               Copiar
