@@ -242,6 +242,18 @@
   background: #c0392b;
 }
 
+.logo-info, .correction-info {
+  display: block;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.correction-info {
+  color: #667eea;
+}
+
 
 @media (max-width: 768px) {
   .generator-card {

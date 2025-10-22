@@ -36,7 +36,13 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const newOptions = { ...options, logo: e.target.result };
+        // Ajustar automáticamente el tamaño del logo para mantener escaneabilidad
+        const optimalLogoSize = Math.min(25, options.logoSize || 25);
+        const newOptions = { 
+          ...options, 
+          logo: e.target.result,
+          logoSize: optimalLogoSize
+        };
         onOptionsChange(newOptions);
       };
       reader.readAsDataURL(file);
@@ -153,14 +159,20 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
               <label htmlFor="error-level">Nivel de corrección:</label>
               <select
                 id="error-level"
-                value={options.errorCorrectionLevel}
+                value={options.logo ? 'H' : options.errorCorrectionLevel}
                 onChange={(e) => handleOptionChange('errorCorrectionLevel', e.target.value)}
+                disabled={options.logo}
               >
                 <option value="L">Bajo (L)</option>
                 <option value="M">Medio (M)</option>
                 <option value="Q">Alto (Q)</option>
                 <option value="H">Máximo (H)</option>
               </select>
+              {options.logo && (
+                <small className="correction-info">
+                  Ajustado automáticamente a Máximo (H) para mantener escaneabilidad con logo
+                </small>
+              )}
             </div>
 
             <div className="option-group logo-section">
@@ -197,12 +209,15 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
                   <input
                     id="logo-size"
                     type="range"
-                    min="20"
-                    max="100"
+                    min="15"
+                    max="25"
                     value={options.logoSize}
                     onChange={(e) => handleOptionChange('logoSize', parseInt(e.target.value))}
                   />
                   <span>{options.logoSize}%</span>
+                  <small className="logo-info">
+                    Tamaño optimizado para mantener escaneabilidad
+                  </small>
                 </div>
               )}
             </div>

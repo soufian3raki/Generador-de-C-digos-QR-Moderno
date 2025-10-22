@@ -15,7 +15,11 @@ const QRDisplay = ({ data, options }) => {
   const addLogoToQR = (canvas, logoDataUrl, logoSizePercent) => {
     const ctx = canvas.getContext('2d');
     const canvasSize = canvas.width;
-    const logoSize = (canvasSize * logoSizePercent) / 100;
+    
+    // Calcular tamaño óptimo del logo basado en el tamaño del QR
+    // Máximo 25% del tamaño del QR para mantener escaneabilidad
+    const maxLogoSize = canvasSize * 0.25;
+    const logoSize = Math.min((canvasSize * logoSizePercent) / 100, maxLogoSize);
     
     // Crear imagen del logo
     const logoImg = new Image();
@@ -24,9 +28,10 @@ const QRDisplay = ({ data, options }) => {
       const x = (canvasSize - logoSize) / 2;
       const y = (canvasSize - logoSize) / 2;
       
-      // Dibujar fondo blanco para el logo
+      // Dibujar fondo blanco para el logo con margen
+      const margin = Math.max(2, logoSize * 0.1);
       ctx.fillStyle = '#ffffff';
-      ctx.fillRect(x - 2, y - 2, logoSize + 4, logoSize + 4);
+      ctx.fillRect(x - margin, y - margin, logoSize + (margin * 2), logoSize + (margin * 2));
       
       // Dibujar el logo
       ctx.drawImage(logoImg, x, y, logoSize, logoSize);
@@ -54,7 +59,8 @@ const QRDisplay = ({ data, options }) => {
           dark: options.color,
           light: options.backgroundColor
         },
-        errorCorrectionLevel: options.errorCorrectionLevel
+        // Ajustar automáticamente el nivel de corrección si hay logo
+        errorCorrectionLevel: options.logo ? 'H' : options.errorCorrectionLevel
       };
 
       await QRCode.toCanvas(canvas, data, qrOptions);

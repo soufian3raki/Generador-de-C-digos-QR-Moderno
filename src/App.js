@@ -13,7 +13,7 @@ function App() {
     margin: 4,
     errorCorrectionLevel: 'M',
     logo: null,
-    logoSize: 50
+    logoSize: 20
   });
 
   return (
