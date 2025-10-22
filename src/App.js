@@ -13,7 +13,10 @@ function App() {
     margin: 4,
     errorCorrectionLevel: 'M',
     logo: null,
-    logoSize: 20
+    logoSize: 20,
+    borderStyle: 'none',
+    borderColor: '#000000',
+    borderWidth: 2
   });
 
   return (

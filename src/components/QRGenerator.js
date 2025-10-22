@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Link, Text, Mail, Phone, MapPin, Image, Upload } from 'lucide-react';
+import { Settings, Link, Text, Mail, Phone, MapPin, Image, Upload, Square, Circle, Minus } from 'lucide-react';
 import './QRGenerator.css';
 
 const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
@@ -220,6 +220,69 @@ const QRGenerator = ({ onDataChange, onOptionsChange, options }) => {
                   </small>
                 </div>
               )}
+            </div>
+
+            <div className="option-group border-section">
+              <label>Estilo de borde:</label>
+              <div className="border-controls">
+                <div className="border-style-buttons">
+                  <button
+                    className={`border-style-btn ${options.borderStyle === 'none' ? 'active' : ''}`}
+                    onClick={() => handleOptionChange('borderStyle', 'none')}
+                    title="Sin borde"
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <button
+                    className={`border-style-btn ${options.borderStyle === 'solid' ? 'active' : ''}`}
+                    onClick={() => handleOptionChange('borderStyle', 'solid')}
+                    title="Borde sólido"
+                  >
+                    <Square size={16} />
+                  </button>
+                  <button
+                    className={`border-style-btn ${options.borderStyle === 'dashed' ? 'active' : ''}`}
+                    onClick={() => handleOptionChange('borderStyle', 'dashed')}
+                    title="Borde discontinuo"
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <button
+                    className={`border-style-btn ${options.borderStyle === 'dotted' ? 'active' : ''}`}
+                    onClick={() => handleOptionChange('borderStyle', 'dotted')}
+                    title="Borde punteado"
+                  >
+                    <Circle size={16} />
+                  </button>
+                </div>
+                
+                {options.borderStyle !== 'none' && (
+                  <>
+                    <div className="option-group">
+                      <label htmlFor="border-color">Color del borde:</label>
+                      <input
+                        id="border-color"
+                        type="color"
+                        value={options.borderColor}
+                        onChange={(e) => handleOptionChange('borderColor', e.target.value)}
+                      />
+                    </div>
+                    
+                    <div className="option-group">
+                      <label htmlFor="border-width">Grosor del borde:</label>
+                      <input
+                        id="border-width"
+                        type="range"
+                        min="1"
+                        max="10"
+                        value={options.borderWidth}
+                        onChange={(e) => handleOptionChange('borderWidth', parseInt(e.target.value))}
+                      />
+                      <span>{options.borderWidth}px</span>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
 
           </div>

@@ -131,7 +131,10 @@ const QRDisplay = ({ data, options }) => {
                 className="qr-canvas"
                 style={{
                   opacity: isGenerating ? 0.5 : 1,
-                  transition: 'opacity 0.3s ease'
+                  transition: 'opacity 0.3s ease',
+                  border: options.borderStyle !== 'none' 
+                    ? `${options.borderWidth}px ${options.borderStyle} ${options.borderColor}`
+                    : 'none'
                 }}
               />
               {isGenerating && (
@@ -176,6 +179,15 @@ const QRDisplay = ({ data, options }) => {
               <div className="info-item">
                 <span className="info-label">Caracteres:</span>
                 <span className="info-value">{data.length}</span>
+              </div>
+              <div className="info-item">
+                <span className="info-label">Borde:</span>
+                <span className="info-value">
+                  {options.borderStyle === 'none' ? 'Sin borde' : 
+                   options.borderStyle === 'solid' ? 'Sólido' :
+                   options.borderStyle === 'dashed' ? 'Discontinuo' :
+                   options.borderStyle === 'dotted' ? 'Punteado' : 'Sin borde'}
+                </span>
               </div>
             </div>
           </div>

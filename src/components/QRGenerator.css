@@ -254,6 +254,56 @@
   color: #667eea;
 }
 
+.border-section {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.border-section label {
+  min-width: auto;
+  margin-bottom: 0.5rem;
+}
+
+.border-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.border-style-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.border-style-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.border-style-btn:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+  color: #667eea;
+}
+
+.border-style-btn.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
 
 @media (max-width: 768px) {
   .generator-card {
